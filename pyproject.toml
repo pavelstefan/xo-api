@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "xo-api"
+version = "0.1.0"
+description = ""
+authors = ["Stefan Pavel <pavel_stefan96@hotmail.com>"]
+readme = "README.md"
+packages = [{include = "xo_api"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.101.1"
+uvicorn = "^0.23.2"
+prisma = "^0.9.1"
+python-dotenv = "^1.0.0"
+pydantic = {version = "1.10", extras = ["dotenv"]}
+asyncio = "^3.4.3"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
