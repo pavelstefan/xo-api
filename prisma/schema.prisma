@@ -9,7 +9,60 @@ generator client {
 }
 
 model User {
-  id           Int    @id @default(autoincrement())
-  email        String @unique
+  createdAt    DateTime       @default(now())
+  id           Int            @id @default(autoincrement())
+  email        String         @unique
   passwordHash String
+  move         Move[]
+  games        UsersOnGames[]
+}
+
+model Move {
+  createdAt DateTime @default(now())
+  player    User     @relation(fields: [userId], references: [id])
+  game      Game     @relation(fields: [gameId], references: [id])
+  userId    Int
+  gameId    Int
+  cell      GameCell
+
+  @@id([userId, gameId, cell])
+}
+
+model UsersOnGames {
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  game      Game     @relation(fields: [gameId], references: [id])
+  userId    Int
+  gameId    Int
+
+  @@id([gameId, userId])
+}
+
+model Game {
+  createdAt    DateTime       @default(now())
+  id           Int            @id @default(autoincrement())
+  users        UsersOnGames[]
+  winnerId     Int?
+  moves        Move[]
+  playerToMove Int
+  status       GameStatus
+}
+
+enum GameStatus {
+  open
+  active
+  ended_draw
+  ended_win
+}
+
+enum GameCell {
+  A1
+  A2
+  A3
+  B1
+  B2
+  B3
+  C1
+  C2
+  C3
 }
