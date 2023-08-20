@@ -178,7 +178,8 @@ class GameService:
             ),
             data=GameUpdateInput(
                 playerToMove=player_to_move.id,
-                status=status
+                status=status,
+                winnerId=user.id if did_win else None
             ),
             include=GameInclude(
                 users=FindManyUsersOnGamesArgsFromGame(
